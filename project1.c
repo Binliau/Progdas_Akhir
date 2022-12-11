@@ -104,10 +104,10 @@ typedef struct{
 	int co2;
 }input;
 
-	int counter, n;
+	int counter, n, sumco2 = 0, sumbiaya = 0;
 	int* biaya;
 	int* co2;
-	float rp_kwh;
+	float rp_kwh, sumkwh = 0;
 	input *device;
 
 	printf("CALCULATION\n\n");
@@ -142,7 +142,17 @@ typedef struct{
 		printf("CO2\t: %d gram\n", device[counter].co2);
 		printf("Biaya\t: %d Rupiah\n", device[counter].biaya);
 		printf("\n");
+		
+		sumkwh += device[counter].kwh;
+		sumco2 += device[counter].co2;
+		sumbiaya += device[counter].biaya;
 	}
+	
+	printf("\nKALKULASI TOTAL SEMUA DEVICE\n");
+	printf("Total KWH\t: %.2f\n", sumkwh);
+	printf("Total CO2\t: %d gram\n", sumco2);
+	printf("Total Biaya\t: %d rupiah\n", sumbiaya);
+	
 	printf("\nTekan tombol apapun untuk kembali ke menu utama\n");
 	system("pause");
 	system("cls");
