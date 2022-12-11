@@ -2,6 +2,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//Deklarasi Struct
+/*typedef struct{
+	char name [50];
+	float kw;
+	float h;
+	float kwh;
+	float co2_h;
+	float biaya;
+	float co2;
+}input;
+typedef struct{
+	float sumkwh;
+	float sumco2;
+	float sumbiaya;
+}output;
+	int n;
+	
+	input *device;
+	output *sum;*/
+
 //Deklarasi Function
 void handling(); 
 void menu_utama(); 
@@ -56,7 +76,8 @@ int submenu_end(){
 
 //Function untuk menu utama atau menu startup
 void menu_utama(){
-	int result = 0;
+
+	int result;
 	printf("Emission of GHG and Price Calculator for Electrical Appliances (EPCEA Jakarta Ver.)\nBy Kelompok 4\n");
 	printf("---------------------------------------------------------");
 	printf("\n1. Kevin Raihan\n2. Hanif Nur Ilham Sanjaya\n3. Tjokorde Gde Agung Abel Putra\n4. Samuel Tanaka Sibarani\n");
@@ -71,7 +92,7 @@ void menu_utama(){
 				break;
 			case 2 :
 				system("cls");
-				menu_plan(); //unfinished function
+				//menu_plan(); //unfinished function
 			case 3 : 
 				system("cls");
 				printf("ini tampilan data yang dimasukkan");//Placeholder, untuk menampilkan data tersimpan
@@ -90,7 +111,7 @@ void menu_utama(){
 	}
 }
 
-void menu_kalkulasi(){
+void menu_kalkulasi(/*input* device, output* sum, int n*/ ){
 //Rumus : kwh = kw x h 
 //		  co2 = kwh x co2/h
 //		  Rp  = kwh x Rp/kwh
@@ -100,16 +121,21 @@ typedef struct{
 	float h;
 	float kwh;
 	float co2_h;
-	int biaya;
-	int co2;
+	float biaya;
+	float co2;
 }input;
-
-	int counter, n, sumco2 = 0, sumbiaya = 0;
-	int* biaya;
-	int* co2;
-	float rp_kwh, sumkwh = 0;
+//typedef struct{
+	float sumkwh;
+	float sumco2;
+	float sumbiaya;
+//}output;
+	int n;
+	
 	input *device;
-
+//	output *sum;
+	//2 Line di bawah ini, di declare dalam function aja
+	int counter;
+	float rp_kwh;
 	printf("CALCULATION\n\n");
 	rp_kwh = kalkulasi_rp_kwh();
 	system("cls");
@@ -122,25 +148,25 @@ typedef struct{
 	
 	for(counter = 0; counter < n; counter++){
 		//Input nama device atau alat elektronik
-		printf("\n\nJenis device\t\t\t\t: ");
-		scanf(" %[^\n]", &device[counter].name);
-		printf("KW per jam\t\t\t\t: ");
+		printf("\n\nNama device\t\t\t\t: ");
+		scanf(" %[^\n]s", &device[counter].name);
+		printf("Energi per jam(kW)\t\t\t: ");
 		scanf("%f", &device[counter].kw);
 		printf("Durasi penggunaan per hari (Jam)\t: ");
 		scanf("%f", &device[counter].h);
 		printf("Emisi CO2 per jam\t\t\t: ");
 		scanf("%f", &device[counter].co2_h);
 	} 
-
+	system("cls");
 	printf("\nEmisi CO2 dan Biaya listrik yang dihasilkan dalam sehari \n");
 	for(counter = 0; counter < n; counter++){
 		device[counter].kwh = device[counter].kw * device[counter].h;
 		device[counter].co2 = device[counter].kwh * device[counter].co2_h;
 		device[counter].biaya = device[counter].kwh * rp_kwh;
 		printf("Kalkulasi %s:\n",device[counter].name);
-		printf("KWH\t: %.2f\n", device[counter].kwh);
-		printf("CO2\t: %d gram\n", device[counter].co2);
-		printf("Biaya\t: %d Rupiah\n", device[counter].biaya);
+		printf("Energi\t: %.2f kWh\n", device[counter].kwh);
+		printf("CO2\t: %.2f gram\n", device[counter].co2);
+		printf("Biaya\t: %.2f Rupiah\n", device[counter].biaya);
 		printf("\n");
 		
 		sumkwh += device[counter].kwh;
@@ -149,9 +175,9 @@ typedef struct{
 	}
 	
 	printf("\nKALKULASI TOTAL SEMUA DEVICE\n");
-	printf("Total KWH\t: %.2f\n", sumkwh);
-	printf("Total CO2\t: %d gram\n", sumco2);
-	printf("Total Biaya\t: %d rupiah\n", sumbiaya);
+	printf("Total Energi\t: %.2f kWh\n", sumkwh);
+	printf("Total CO2\t: %.2f gram\n", sumco2);
+	printf("Total Biaya\t: %.2f rupiah\n", sumbiaya);
 	
 	printf("\nTekan tombol apapun untuk kembali ke menu utama\n");
 	system("pause");
