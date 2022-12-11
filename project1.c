@@ -7,6 +7,7 @@ void handling();
 void menu_utama(); 
 void menu_kalkulasi();
 float kalkulasi_rp_kwh();
+void menu_newplan();
 void menu_data();
 void menu_help(); 
 void help_pemakaian(); 
@@ -66,25 +67,24 @@ void menu_utama(){
 		switch (result){
 			case 1 :
 				system("cls");
-				menu_kalkulasi(); //unfinished function
+				menu_kalkulasi(); //slightly finished function
 				break;
-			case 2 : 
-			system("cls");
-				printf("ini tampilan data yang dimasukkan");//Placeholder, untuk menampilkan data tersimpan
-				break;
-			case 3 :
+			case 2 :
 				system("cls");
-				menu_help(); //ini pilihan ke-3 MENU HELP
+				menu_plan(); //unfinished function
+			case 3 : 
+				system("cls");
+				printf("ini tampilan data yang dimasukkan");//Placeholder, untuk menampilkan data tersimpan
 				break;
 			case 4 :
 				system("cls");
-				printf("ini credit, tapi kyknya bisa diganti reset data, kalau pada mau");
+				menu_help(); //ini pilihan ke-4 MENU HELP
+				break;
 			case 5 :
 				program_end();
 			default :
 				printf("WARNING :\nPILIHAN TIDAK TERSEDIA\nSILAHKAN MENGULANG INPUT\n");
 				handling();
-				system("cls");
 				menu_utama();
 				break;
 	}
@@ -132,7 +132,7 @@ typedef struct{
 		scanf("%f", &device[counter].co2_h);
 	} 
 
-	printf("\nMenghitung Emisi CO2 per Jam\n");
+	printf("\nEmisi CO2 dan Biaya listrik yang dihasilkan dalam sehari \n");
 	for(counter = 0; counter < n; counter++){
 		device[counter].kwh = device[counter].kw * device[counter].h;
 		device[counter].co2 = device[counter].kwh * device[counter].co2_h;
@@ -143,7 +143,6 @@ typedef struct{
 		printf("Biaya\t: %d Rupiah\n", device[counter].biaya);
 		printf("\n");
 	}
-
 	printf("\nTekan tombol apapun untuk kembali ke menu utama\n");
 	system("pause");
 	system("cls");
@@ -180,6 +179,10 @@ float kalkulasi_rp_kwh(){
 			break;
 	}
 	return rp_kwh;
+}
+
+void menu_newplan(){
+
 }
 
 //Function untuk submenu help
