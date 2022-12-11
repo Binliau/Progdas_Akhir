@@ -76,7 +76,9 @@ int submenu_end(){
 
 //Function untuk menu utama atau menu startup
 void menu_utama(){
-
+/*	int n;
+	input *device;
+	output *sum;*/
 	int result;
 	printf("Emission of GHG and Price Calculator for Electrical Appliances (EPCEA Jakarta Ver.)\nBy Kelompok 4\n");
 	printf("---------------------------------------------------------");
